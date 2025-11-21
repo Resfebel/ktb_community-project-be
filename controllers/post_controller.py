@@ -1,34 +1,10 @@
-from pydantic import BaseModel, Field
-from typing import Optional, Any
 from fastapi import HTTPException
 from starlette import status
 from datetime import datetime
 
 from datas.post_data import POST_DATA, post_id_counter
 from datas.user_data import USER_DATA
-
-
-# 틀
-# 응답
-class Response(BaseModel):
-    message: str
-    data: Optional[Any] = None
-
-# 게시글 작성
-class PostCreate(BaseModel):
-    title: str = Field(..., max_length=26)
-    content: str
-    post_image: Optional[str] = None
-
-# 게시글 수정
-class PostUpdate(BaseModel):
-    title: str = Field(..., max_length=26)
-    content: str
-    post_image: Optional[str] = None
-
-# 댓글 작성
-class Comment(BaseModel):
-    comment_content: str
+from models.post_model import (Response, PostCreate, PostUpdate, Comment)
 
 
 # 게시글 작성
@@ -79,7 +55,6 @@ def create_post(current_user: dict, post: PostCreate) -> Response:
                  "post_id": post_id }
     )
 
-
 # 게시글 목록 조회
 def get_post_list() :
     post_list = []
@@ -94,7 +69,6 @@ def get_post_list() :
         post_list.append(post_summary)
 
     return post_list
-
 
 # 게시글 상세조회
 def get_post(post_id: int) -> Response:
@@ -260,7 +234,10 @@ def update_comment(post_id: int, comment_id: int, current_user: dict, new_commen
     # 예외 4: 사용자 - 댓글 작성자 불일치
     auth_email = current_user.get("email")
     user_info = USER_DATA.get(auth_email)
-    if user_info.get("user_id") != comment_id:
+    commenter_id = comment_info.get("commenter_id")
+    print(user_info.get("user_id"))
+    print(comment_id)
+    if user_info.get("user_id") != commenter_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail = { "message": "댓글을 수정할 권한이 없습니다." }
@@ -293,7 +270,8 @@ def delete_comment(post_id: int, comment_id: int, current_user: dict) -> Respons
     # 예외 3: 사용자 - 댓글 작성자 불일치
     auth_email = current_user.get("email")
     user_info = USER_DATA.get(auth_email)
-    if user_info.get("user_id") != comment_id:
+    commenter_id = comment_info.get("commenter_id")
+    if user_info.get("user_id") != commenter_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail = { "message": "댓글을 삭제할 권한이 없습니다." }
@@ -301,5 +279,5 @@ def delete_comment(post_id: int, comment_id: int, current_user: dict) -> Respons
 
     del comment_dict[comment_id]
     return Response(
-        message = "게시글 삭제 완료"
+        message = "댓글 삭제 완료"
     )

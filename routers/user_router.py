@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends
 
 from controllers import user_controller
-from controllers.user_controller import UserSignup, UserLogin, UserUpdate, PasswordUpdate
+from models.user_model import UserSignup, UserLogin, UserUpdate, PasswordUpdate
 from typing import Dict, Any
 
 from datas.user_data import USER_DATA

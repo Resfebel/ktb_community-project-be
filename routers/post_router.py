@@ -2,7 +2,7 @@ from fastapi import APIRouter, status
 from fastapi.params import Depends
 
 from controllers import post_controller
-from controllers.post_controller import PostCreate, PostUpdate, Comment
+from models.post_model import PostCreate, PostUpdate, Comment
 from utils.deps import get_current_user
 
 router = APIRouter(
