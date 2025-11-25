@@ -16,7 +16,8 @@
 
 > commit : (과제2) ~
 > 
-> requirements.txt 설치 필수
+> ~~requirements.txt 설치 필수~~
+> pyproject.toml 참고
 > 
 > uvicorn으로 main.py로 실행
 
@@ -36,6 +37,24 @@
 
 > commit : (과제4) ~
 > 
-> (requirements.txt 설치 필수) 2에서 했다면 생략
+> ~~requirements.txt 설치 필수~~
+> pyproject.toml 참고
+> 
+> uvicorn으로 main.py로 실행
+
+
+---
+
+# week10 : 10주차 과제
+## 1. FastAPI로 모델 서빙
+
+- 모델 종류는 자신이 선택
+- Postman 테스트 필수
+
+> commit : week10 (과제1) ~
+>
+> pyproject.toml 참고
+> 
+> 모델 : YOLO 8
 > 
 > uvicorn으로 main.py로 실행
