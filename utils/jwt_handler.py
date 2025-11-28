@@ -24,13 +24,13 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 def decode_access_token(token: str):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        # payload -> email 추출
-        email: str = payload.get("email")
+        # payload -> user_id 추출
+        user_id: str = payload.get("user_id")
 
-        if email is None:
+        if user_id is None:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                                 detail="Invalid token payload")
-        return {"email": email}
+        return {"user_id": user_id}
 
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,

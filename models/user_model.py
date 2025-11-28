@@ -87,6 +87,13 @@ class UserLogin(BaseModel):
             raise ValueError(PASSWORD_FAILURE_MESSAGE)
         return value
 
+# 정보 조회
+class UserInfo(BaseModel):
+    email: str
+    nickname: str
+    profile_image: Optional[str] = None
+
+
 # 정보 수정
 class UserUpdate(BaseModel):
     nickname: Optional[str] = Field(None, max_length=10)

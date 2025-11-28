@@ -17,6 +17,8 @@ python-multipart = ">=0.0.20,<0.0.21"
 python-jose = ">=3.5.0,<4.0.0"
 bcrypt = ">=5.0.0,<6.0.0"
 ultralytics = ">=8.3.231,<9.0.0"
+sqlalchemy = "^2.0.44"
+mysql-connector-python = "^9.5.0"
 
 [tool.poetry.group.dev.dependencies]
 uvicorn = ">=0.38.0,<0.39.0"

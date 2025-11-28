@@ -23,5 +23,5 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict[str, Any]:
     except HTTPException:
         raise
 
-    # 디코딩 -> 페이로드에 이메일 딕셔너리가 담겨서 옴!
+    # 디코딩 -> 페이로드에 유저 아이디 딕셔너리가 담겨서 옴!
     return payload
